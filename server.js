@@ -1,10 +1,13 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
 // MIDDLEWARE
-app.use(express.static('./public'))
+app.use(express.static('./public'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 
 app.get('/notes', (req,res)=> {
     res.sendFile(path.join(__dirname, './public/notes.html'))
@@ -15,7 +18,14 @@ app.get('/api/notes', (req,res)=> {
 })
 
 app.post('/api/notes', (req, res)=> {
-    console.log(req.body)
+    console.log(req.body);
+    fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+        const notes = JSON.parse(data);
+        notes.push(req.body);
+        fs.writeFile('./db/db.json', JSON.stringify(notes), ()=> {
+            res.send('notes added!')
+        });
+    })
 })
 
 app.get('/*', (req,res)=> {

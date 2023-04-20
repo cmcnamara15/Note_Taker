@@ -35,12 +35,13 @@ app.delete('/api/notes:id', (req, res)=> {
     req.params.id
     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
         const notes = JSON.parse(data);
-        console.log(removeIndex);
+        console.log(notes)
         for(var i=0; i < notes.length; i++){
             const note = notes[i];
             if(notes[i].id === req.params.id){
                 var removeIndex = i;
-
+                console.log(removeIndex);
+                // notes.splice(removeIndex);
             }
         }
         

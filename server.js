@@ -17,6 +17,7 @@ app.get('/api/notes', (req,res)=> {
     res.sendFile(path.join(__dirname, './db/db.json'))
 })
 
+
 app.post('/api/notes', (req, res)=> {
     console.log(req.body);
     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
@@ -25,6 +26,13 @@ app.post('/api/notes', (req, res)=> {
         fs.writeFile('./db/db.json', JSON.stringify(notes), ()=> {
             res.send('notes added!')
         });
+    })
+})
+
+app.get('/api/notes', (req, res)=> {
+    fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+        const savedNotes = JSON.parse(data)
+        console.log(savedNotes)
     })
 })
 

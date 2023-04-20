@@ -20,6 +20,8 @@ app.get('/api/notes', (req,res)=> {
 
 app.post('/api/notes', (req, res)=> {
     console.log(req.body);
+    const newNote = req.body
+    newNote.id = (Math.random() + 1).toString(36).substring(7)
     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
         const notes = JSON.parse(data);
         notes.push(req.body);
@@ -29,10 +31,19 @@ app.post('/api/notes', (req, res)=> {
     })
 })
 
-app.get('/api/notes', (req, res)=> {
+app.delete('/api/notes:id', (req, res)=> {
+    req.params.id
     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
-        const savedNotes = JSON.parse(data)
-        console.log(savedNotes)
+        const notes = JSON.parse(data);
+        console.log(removeIndex);
+        for(var i=0; i < notes.length; i++){
+            const note = notes[i];
+            if(notes[i].id === req.params.id){
+                var removeIndex = i;
+
+            }
+        }
+        
     })
 })
 

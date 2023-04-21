@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const db = require('./db/db.json');
+
 
 const app = express();
 
@@ -31,22 +33,26 @@ app.post('/api/notes', (req, res)=> {
     })
 })
 
-app.delete('/api/notes:id', (req, res)=> {
-    req.params.id
-    fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
-        const notes = JSON.parse(data);
+app.delete('/api/notes/:id', (req, res)=> {
+    // fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+        const notes = req.params.id;
         console.log(notes)
-        for(var i=0; i < notes.length; i++){
-            const note = notes[i];
-            if(notes[i].id === req.params.id){
-                var removeIndex = i;
-                console.log(removeIndex);
-                // notes.splice(removeIndex);
+        for(var i=0; i < db.length; i++){
+            const note = db[i];
+            if(note.id === notes){
+                // var removeIndex = i;
+                db.splice(i, 1);
+                fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err)=> {
+                    if(err){
+                        console.log(err)
+                    }
+                })
+                res.json('Note Deleted!')
             }
+            res.json('id doesnt exist')
         }
-        
+
     })
-})
 
 app.get('/*', (req,res)=> {
     res.sendFile(path.join(__dirname, './public/index.html'))
@@ -63,4 +69,21 @@ app.listen(3001, () => {
 
 // app.get('/assets/css/styles.css', (req, res)=> {
 //     res.sendFile(path.join(__dirname, './public/assets/css/styles.css'))
+// })
+
+
+// app.delete('/api/notes:id', (req, res)=> {
+//     res.send(`deleted note ${req.params.id}`)
+//     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+//         const notes = JSON.parse(data);
+//         console.log(notes)
+//         for(var i=0; i < notes.length; i++){
+//             const note = notes[i];
+//             if(notes[i].id === req.params.id){
+//                 var removeIndex = i;
+//                 notes.splice(removeIndex, 1);
+//                 res.send('Note Deleted!')
+//             }
+//         }
+//     })
 // })

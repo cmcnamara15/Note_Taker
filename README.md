@@ -21,10 +21,10 @@ This project was built to exercise utilizing routes to make api calls and connec
 [Demo Video]()<br />
 
 ## REPO URL
-[Repository URL](https://github.com/cmcnamara15/Employee_Tracker)<br />
+[Repository URL](https://github.com/cmcnamara15/Note_Taker)<br />
 
 ## Installation
-Express, Nodejs, <br />
+Express.js, Nodejs, <br />
 
 ## Usage Information
 The user should be familiar with the basic formatting of README files.<br />

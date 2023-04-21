@@ -1,3 +1,4 @@
+// Required files and packages 
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -20,6 +21,7 @@ app.get('/api/notes', (req,res)=> {
 })
 
 
+// Route that allows user to post notes and gives unique id 
 app.post('/api/notes', (req, res)=> {
     console.log(req.body);
     const newNote = req.body
@@ -33,6 +35,8 @@ app.post('/api/notes', (req, res)=> {
     })
 })
 
+
+// Route built to connect the logic to a delete note 
 app.delete('/api/notes/:id', (req, res)=> {
     // fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
         const notes = req.params.id;
@@ -40,24 +44,27 @@ app.delete('/api/notes/:id', (req, res)=> {
         for(var i=0; i < db.length; i++){
             const note = db[i];
             if(note.id === notes){
-                // var removeIndex = i;
                 db.splice(i, 1);
                 fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(db), (err)=> {
                     if(err){
                         console.log(err)
                     }
                 })
-                res.json('Note Deleted!')
+                res.json("Note Deleted!")
             }
-            res.json('id doesnt exist')
+            res.json("id doesn't exist")
         }
 
     })
 
+
+// Get route that pulls everything 
 app.get('/*', (req,res)=> {
     res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
+
+// Method that binds with specific host 
 app.listen(3001, () => {
     console.log('server is running')
 });

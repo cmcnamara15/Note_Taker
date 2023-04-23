@@ -69,28 +69,4 @@ app.listen(3001, () => {
     console.log('server is running')
 });
 
-
-
-
-
-
-// app.get('/assets/css/styles.css', (req, res)=> {
-//     res.sendFile(path.join(__dirname, './public/assets/css/styles.css'))
-// })
-
-
-// app.delete('/api/notes:id', (req, res)=> {
-//     res.send(`deleted note ${req.params.id}`)
-//     fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
-//         const notes = JSON.parse(data);
-//         console.log(notes)
-//         for(var i=0; i < notes.length; i++){
-//             const note = notes[i];
-//             if(notes[i].id === req.params.id){
-//                 var removeIndex = i;
-//                 notes.splice(removeIndex, 1);
-//                 res.send('Note Deleted!')
-//             }
-//         }
-//     })
-// })
+// Server file contains all necessary routes for application to function properly 

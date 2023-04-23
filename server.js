@@ -38,7 +38,8 @@ app.post('/api/notes', (req, res)=> {
 
 // Route built to connect the logic to a delete note 
 app.delete('/api/notes/:id', (req, res)=> {
-    // fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+    fs.readFile('./db/db.json', 'utf-8', (err, data)=> {
+        const db = JSON.parse(data)
         const notes = req.params.id;
         console.log(notes)
         for(var i=0; i < db.length; i++){
@@ -50,12 +51,11 @@ app.delete('/api/notes/:id', (req, res)=> {
                         console.log(err)
                     }
                 })
-                res.json("Note Deleted!")
             }
-            res.json("id doesn't exist")
         }
-
+        res.json("Note Deleted!")
     })
+})
 
 
 // Get route that pulls everything 

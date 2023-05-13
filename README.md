@@ -16,6 +16,10 @@
 - [README Documentation](#readme-docmentation)
 
 ## Description
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
 This project was built to exercise utilizing routes to make api calls and connect an existing JS file to the server file. The application was built as a tool for a user to write and save notes. Using an Express.js back end this application saves and retrieves data from a JSON file. 
 
 
